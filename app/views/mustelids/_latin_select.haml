@@ -1,0 +1,11 @@
+Type: Subfamily
+= render :partial => "subfamily", :locals => { :selected => 6 }
+Genus
+%span#genusp
+  = render :partial => "genus", :locals => { :sf => 6 }
+Species
+%span#speciesp
+  = render :partial => "species", :locals => { :g => 1 }
+
+= observe_field :subfamily, :url => { :action => :subfamily_change }, :update => :genus, :frequency => 0.25
+= observe_field :genus, :url => { :action => :genus_change }, :update => :species, :frequency => 0.25
