@@ -1,17 +1,15 @@
-%h1 Marten Database
-#maincontent
-  #headings
-    .heading
-      Name
-    .heading
-      Type
+#headings
+  .heading
+    Name
+  .heading
+    Type
+  %br.clear
+#entries
+  - @mustelids.each do |m|
+    .entry
+      =h m.name
+    .entry
+      %em
+        = m.species.genus.name
+        = m.species.name
     %br.clear
-  #entries
-    - @mustelids.each do |m|
-      .entry
-        = m.name
-      .entry
-        %em
-          = m.species.genus.name
-          = m.species.name
-      %br.clear

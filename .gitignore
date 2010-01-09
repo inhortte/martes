@@ -1,5 +1,6 @@
 vendor/*
 tmp/*
 log/*
+script/*
 config/database.yml
 *~

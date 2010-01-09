@@ -14,4 +14,24 @@ class MustelidsController < ApplicationController
       }
     }
   end
+
+  # GET /mustelids/new
+  def new
+    @mustelid = Mustelid.new
+    @subfamilies = Subfamily.find(:all)
+  end
+
+  def subfamily_change(sf)
+    sf = sf.split('=')[1].to_i
+    render :update do |p|
+      p.replace_html "genusp", :partial => "genus", :locals => { :sf => sf }
+    end
+  end
+
+  def genus_change(g)
+    g = g.split('=')[1].to_i
+    render :update do |p|
+      p.replace_html "speciesp", :partial => "species", :locals => { :g => g }
+    end
+  end
 end

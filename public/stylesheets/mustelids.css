@@ -7,6 +7,9 @@ body {
 .clear {
   clear: both; }
 
+.inline {
+  display: inline; }
+
 #maincontent {
   margin: 50px 100px 50px 100px;
   background-color: #ddf; }
