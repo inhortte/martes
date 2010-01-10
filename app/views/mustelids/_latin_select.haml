@@ -2,10 +2,10 @@ Type: Subfamily
 = render :partial => "subfamily", :locals => { :selected => 6 }
 Genus
 %span#genusp
-  = render :partial => "genus", :locals => { :sf => 6 }
+  = render :partial => "genus", :locals => { :sf => 6, :selected => nil }
 Species
 %span#speciesp
-  = render :partial => "species", :locals => { :g => 1 }
+  = render :partial => "species", :locals => { :g => 1, :selected => nil }
 
 = observe_field :subfamily, :url => { :action => :subfamily_change }, :update => :genus, :with => "'thurk=' + value"
 = observe_field :genus, :url => { :action => :genus_change }, :update => :species, :with => "'thurk=' + value"

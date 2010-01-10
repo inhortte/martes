@@ -96,14 +96,14 @@ class MustelidsController < ApplicationController
   def subfamily_change
     sf = params[:thurk].to_i
     render :update do |p|
-      p.replace_html "genusp", :partial => "genus", :locals => { :sf => sf }
+      p.replace_html "genusp", :partial => "genus", :locals => { :sf => sf, :selected => nil }
     end
   end
 
   def genus_change
     g = params[:thurk].to_i
     render :update do |p|
-      p.replace_html "speciesp", :partial => "species", :locals => { :g => g }
+      p.replace_html "speciesp", :partial => "species", :locals => { :g => g, :selected => nil }
     end
   end
 end
