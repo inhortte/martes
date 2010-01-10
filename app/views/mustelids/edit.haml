@@ -1,0 +1,14 @@
+%h3
+  Editing a Marten
+
+- form_for(@mustelid) do |f|
+  = f.error_messages
+
+  %p
+    = f.label :name
+    = f.text_field :name
+
+  %p
+    = render :partial => "latin_edit"
+  %p
+    = f.submit "Update"

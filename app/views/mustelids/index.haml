@@ -12,4 +12,10 @@
       %em
         = m.species.genus.name
         = m.species.name
-    %br.clear
+    .entry.smalltext
+      = link_to 'edit', edit_mustelid_path(m)
+      = link_to 'delete', m, :confirm => 'Are you serious?', :method => :delete
+    %br
+
+#links
+  = link_to "Add a Mustelid", new_mustelid_path

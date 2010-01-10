@@ -1,0 +1,11 @@
+Type: Subfamily
+= render :partial => "subfamily", :locals => { :selected => @mustelid.species.genus.subfamily_id }
+Genus
+%span#genusp
+  = render :partial => "genus", :locals => { :sf => @mustelid.species.genus.subfamily_id, :selected => @mustelid.species.genus_id }
+Species
+%span#speciesp
+  = render :partial => "species", :locals => { :g => @mustelid.species.genus_id, :selected => @mustelid.species_id }
+
+= observe_field :subfamily, :url => { :action => :subfamily_change }, :update => :genus, :with => "'thurk=' + value"
+= observe_field :genus, :url => { :action => :genus_change }, :update => :species, :with => "'thurk=' + value"

@@ -1,5 +1,6 @@
 body {
-  background-color: #ccc; }
+  background-color: #ccc;
+  font-size: 12pt; }
 
 .ital {
   font-style: italic; }
@@ -10,17 +11,28 @@ body {
 .inline {
   display: inline; }
 
+.smalltext {
+  font-size: 8pt; }
+
 #maincontent {
   margin: 50px 100px 50px 100px;
   background-color: #ddf; }
   #maincontent #headings {
     border-bottom: 1px solid #000;
+    margin: 0px 0px 10px 0px;
     font-weight: bold; }
     #maincontent #headings .heading {
       float: left;
-      padding: 5px 150px 0px 0px; }
+      width: 200px; }
   #maincontent #entries {
-    clear: both; }
+    margin: 0px 0px 10px 0px; }
     #maincontent #entries .entry {
       float: left;
-      padding: 5px 150px 0px 0px; }
+      width: 200px; }
+    #maincontent #entries br {
+      clear: both;
+      margin: 0px 0px 5px 0px; }
+  #maincontent #links {
+    clear: both;
+    margin: 50px 0px 0px 20px;
+    font-size: smaller; }

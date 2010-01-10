@@ -1,1 +1,1 @@
-= select_tag "mustelid_species_id", options_from_collection_for_select(getSpecies(g), 'id', 'name')
+= select_tag "mustelid_species_id", options_from_collection_for_select(getSpecies(g), 'id', 'name', selected), :name => "mustelid[species_id]"
