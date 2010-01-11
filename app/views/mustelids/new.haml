@@ -1,14 +1,4 @@
 %h3
   New Marten
 
-- form_for(@mustelid) do |f|
-  = f.error_messages
-
-  %p
-    = f.label :name
-    = f.text_field :name
-
-  %p
-    = render :partial => "latin_select"
-  %p
-    = f.submit "Save"
+= render :partial => "form", :locals => { :sel_edit => "select", :save_update => "Save" }

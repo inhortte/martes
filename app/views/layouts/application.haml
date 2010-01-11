@@ -1,0 +1,42 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml" "xml:lang" => "en", :lang => "en"}
+  %head
+    %title
+      Mustelids:
+      = Mustelid.count
+    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset => utf-8"}
+    = stylesheet_link_tag 'mustelids'
+    = javascript_include_tag :defaults
+
+  %body
+    #header
+      .superheader
+        - if user_logged_in?
+          %span
+            You are logged in as:
+          = current_user.login
+        - else
+          %span
+            Welcome Guest
+      .midheader
+        %h1
+          Marten Database
+      .subheader
+        %span.donotdisplay
+          Navigation:
+          - if user_logged_in?
+            = link_to 'Logout', logout_url
+          - else
+            = link_to "Signup", signup_url
+            |
+            = link_to 'Login', login_url
+          |
+          = link_to 'Contact Us', 'contact'
+
+    #maincontent
+      - flash.each do |key,value|
+        #flash{:class => "flash_" + key.to_s}
+          %span.message
+            = value
+
+      = yield :layout

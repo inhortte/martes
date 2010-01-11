@@ -14,6 +14,15 @@ body {
 .smalltext {
   font-size: 8pt; }
 
+#flash_notice {
+  color: green; }
+
+#flash_alert {
+  color: orange; }
+
+#flash_error {
+  color: red; }
+
 #maincontent {
   margin: 50px 100px 50px 100px;
   background-color: #ddf; }

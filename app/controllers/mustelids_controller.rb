@@ -1,7 +1,9 @@
 class MustelidsController < ApplicationController
+  layout "application.haml"
 
-  # GET /mustelids
-  # GET /mustelids.xml
+  before_filter :fetch_subfamilies, :only => [:new, :edit]
+  before_filter :fetch_mustelid, :only => [:edit, :update, :destroy]
+
   def index
     options = { :order => 'created_at desc', :per_page => 10 }
 #    @mustelid_pages, @mustelids = paginate :mustelids, options
@@ -15,14 +17,10 @@ class MustelidsController < ApplicationController
     }
   end
 
-  # GET /mustelids/new
   def new
     @mustelid = Mustelid.new
-    @subfamilies = Subfamily.find(:all)
   end
 
-  # POST /mustelids
-  # POST /mustelids.xml
   def create
     @mustelid = Mustelid.new(params[:mustelid])
 
@@ -30,12 +28,10 @@ class MustelidsController < ApplicationController
       if @mustelid.save
         flash[:notice] = 'The mustelid has been saved.'
         format.html {
-#          redirect_to(@mustelid) -- this goes to /mustelids/:id
           redirect_to mustelids_url
         }
         format.xml {
           render :xml => @mustelid, status => :created,
-#                 :location => @mustelid
                  :location => mustelid_url(@mustelid)
         }
       else
@@ -55,13 +51,9 @@ class MustelidsController < ApplicationController
   end
 
   def edit
-    @mustelid = Mustelid.find(params[:id])
-    @subfamilies = Subfamily.find(:all)
   end
 
   def update
-    @mustelid = Mustelid.find(params[:id])
-
     respond_to { |format|
       if @mustelid.update_attributes(params[:mustelid])
         flash[:notice] = 'The mustelid has been updated.'
@@ -85,7 +77,6 @@ class MustelidsController < ApplicationController
   end
 
   def destroy
-    @mustelid = Mustelid.find(params[:id])
     @mustelid.destroy
     respond_to do |format|
       format.html { redirect_to(mustelids_url) }
@@ -105,5 +96,15 @@ class MustelidsController < ApplicationController
     render :update do |p|
       p.replace_html "speciesp", :partial => "species", :locals => { :g => g, :selected => nil }
     end
+  end
+
+  private
+
+  def fetch_subfamilies
+    @subfamilies = Subfamily.find(:all)
+  end
+
+  def fetch_mustelid
+    @mustelid = Mustelid.find(params[:id])
   end
 end
