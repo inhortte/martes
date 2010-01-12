@@ -1,4 +1,4 @@
-- form_for(@mustelid) do |f|
+- form_for @mustelid do |f|
   = f.error_messages
 
   %p
@@ -7,5 +7,15 @@
 
   %p
     = render :partial => "latin_" + sel_edit
+  %p
+    - f.fields_for :detaloj do |d|
+      = d.label :color
+      = d.text_field :color
+      %br
+      = d.label :condylobassal_length
+      = d.text_field :condylobassal_length
+      %br
+      = d.label :image
+      = d.file_field :image
   %p
     = f.submit save_update

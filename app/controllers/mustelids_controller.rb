@@ -19,6 +19,7 @@ class MustelidsController < ApplicationController
 
   def new
     @mustelid = Mustelid.new
+    @mustelid.detaloj.build
   end
 
   def create
