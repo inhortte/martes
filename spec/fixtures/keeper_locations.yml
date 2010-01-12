@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  keeper: 
+  location: 
+  start_date: 2010-01-11 22:20:53
+  end_date: 2010-01-11 22:20:53
+
+two:
+  keeper: 
+  location: 
+  start_date: 2010-01-11 22:20:53
+  end_date: 2010-01-11 22:20:53

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100112002228) do
+ActiveRecord::Schema.define(:version => 20100112042122) do
 
   create_table "detalojs", :force => true do |t|
     t.integer  "mustelid_id"
@@ -23,6 +23,40 @@ ActiveRecord::Schema.define(:version => 20100112002228) do
   create_table "genus", :force => true do |t|
     t.integer  "subfamily_id"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "keeper_locations", :force => true do |t|
+    t.integer  "keeper_id"
+    t.integer  "location_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+  end
+
+  create_table "keepers", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "keepers_mustelids", :id => false, :force => true do |t|
+    t.integer "keeper_id"
+    t.integer "mustelid_id"
+  end
+
+  create_table "location_mustelids", :force => true do |t|
+    t.integer  "mustelid_id"
+    t.integer  "location_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "country"
+    t.string   "province"
+    t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

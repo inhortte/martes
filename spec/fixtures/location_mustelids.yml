@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  mustelid: 
+  location: 
+  start_date: 2010-01-11 22:21:22
+  end_date: 2010-01-11 22:21:22
+
+two:
+  mustelid: 
+  location: 
+  start_date: 2010-01-11 22:21:22
+  end_date: 2010-01-11 22:21:22
