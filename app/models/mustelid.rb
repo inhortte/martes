@@ -8,5 +8,5 @@ class Mustelid < ActiveRecord::Base
   default_find_option :order, :name
 
   accepts_nested_attributes_for :detaloj, :allow_destroy => true,
-    :reject_if => proc { |attr| attr.all? { |k,v| v.blank? } }
+    :reject_if => proc { |attr| attr.all? { |k, v| v.blank? } }
 end
