@@ -43,4 +43,4 @@ Rails::Initializer.run do |config|
 
 end
 
-Haml::Template.options[:attr_wrapper] = '"';
+# Haml::Template.options[:attr_wrapper] = '"';
