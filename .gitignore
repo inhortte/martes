@@ -7,3 +7,4 @@ config/database.yml
 config/initializers/site_keys.rb
 *.old
 !vendor/plugins/a_few_defaults/*
+!vendor/plugins/acts_as_state_machine/*
