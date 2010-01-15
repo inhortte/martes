@@ -1,0 +1,25 @@
+#headings
+  .heading
+    Name
+  .heading
+    Address
+  .heading
+    Province
+  .heading
+    Country
+  %br.clear
+#entries
+  - @locations.each do |l|
+    .entry
+      =h l.name
+    .entry
+      =h l.address
+    .entry
+      - unless(l.province.nil? || l.province.blank?)
+        =h l.province
+      - else
+        = "---"
+    .entry
+      =h l.country
+    %br
+
