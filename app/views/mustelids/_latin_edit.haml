@@ -1,5 +1,5 @@
 Type: Subfamily
-= render :partial => "subfamily", :locals => { :selected => @mustelid.species.genus.subfamily_id }
+= render :partial => "subfamily"
 Genus
 %span#genusp
   = render :partial => "genus", :locals => { :sf => @mustelid.species.genus.subfamily_id, :selected => @mustelid.species.genus_id }

@@ -1,1 +1,1 @@
-= select_tag "subfamily", options_from_collection_for_select(@subfamilies, 'id', 'name', selected)
+= select_tag "subfamily", options_from_collection_for_select(@subfamilies, 'id', 'name', @mustelid.new_record? ? @mustelinae.id : @mustelid.species.genus.subfamily_id)

@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20100114004035
+#
+# Table name: mustelids
+#
+#  id         :integer(4)      not null, primary key
+#  species_id :integer(4)
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:

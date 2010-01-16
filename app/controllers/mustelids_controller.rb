@@ -103,6 +103,7 @@ class MustelidsController < ApplicationController
 
   def fetch_subfamilies
     @subfamilies = Subfamily.find(:all)
+    @mustelinae = @subfamilies[-1]
   end
 
   def fetch_mustelid

@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20100114004035
+#
+# Table name: keepers
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  user_id    :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'spec_helper'
 
 describe Keeper do
