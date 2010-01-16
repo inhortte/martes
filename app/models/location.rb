@@ -13,9 +13,9 @@
 #
 
 class Location < ActiveRecord::Base
-  has_many :location_mustelids
+  has_many :location_mustelids, :dependent => :nullify
   has_many :mustelids, :through => :location_mustelids
-  has_many :keeper_locations
+  has_many :keeper_locations, :dependent => :nullify
   has_many :keepers, :through => :keeper_locations
   validates_presence_of :name, :country, :address
 end
