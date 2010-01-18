@@ -22,7 +22,6 @@ Feature: Keeper descriptions
     And the keeper tends a mustelid
     When the keeper stops tending the mustelid
     Then the keeper will no longer be associated with the mustelid
-
 @new_keeper
   Scenario: Show no locations associated with a new keeper
     Given a keeper
@@ -36,13 +35,6 @@ Feature: Keeper descriptions
     When a keeper is associated with a location
     Then the keeper should be shown at that location
     And the keepers start_date should be set for that location
-@new_keeper
-  Scenario: A keeper has a new location association added
-    Given a keeper
-    And the keeper is associated with one location
-    When a keeper is associated with another location
-    Then the keeper should be shown at both locations
-    And the keepers start_date should be set for the new location
 @new_keeper
   Scenario: A keeper is disassociated with a location
     Given a keeper

@@ -15,7 +15,23 @@
 class Location < ActiveRecord::Base
   has_many :location_mustelids, :dependent => :nullify
   has_many :mustelids, :through => :location_mustelids
-  has_many :keeper_locations, :dependent => :nullify
+  has_many :keeper_locations
   has_many :keepers, :through => :keeper_locations
   validates_presence_of :name, :country, :address
+
+  def keepers
+    self.keeper_locations(true).select { |kl|
+      kl.end_date.nil?
+    }.inject([]) { |keeps, kl|
+      keeps << kl.keeper
+    }
+  end
+
+  def add_keeper(keep)
+    kl = KeeperLocation.create(:keeper_id => keep.id, :location_id => self.id)
+  end
+
+  def remove_keeper(keep)
+    KeeperLocation.find_by_keeper_id_and_location_id(keep.id, self.id).destroy
+  end
 end

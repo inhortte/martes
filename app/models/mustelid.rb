@@ -16,7 +16,7 @@ class Mustelid < ActiveRecord::Base
   belongs_to :species
   has_one :detaloj, :dependent => :destroy
   has_and_belongs_to_many :keepers
-  has_many :location_mustelids, :dependent => :nullify
+  has_many :location_mustelids
   has_many :locations, :through => :location_mustelids
   validates_presence_of :species_id, :name
   default_find_option :order, :name

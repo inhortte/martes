@@ -28,6 +28,8 @@ Then /^the keeper should tend the mustelid$/ do
 end
 
 Given /^the keeper tends a mustelid$/ do
+  @mustelid1 = Mustelid.create mustelid_attributes
+  @keeper.mustelids << @mustelid1
   @keeper.mustelids[0].name.should == "twiggie"
 end
 
@@ -36,65 +38,74 @@ When /^the keeper stops tending the mustelid$/ do
 end
 
 Then /^the keeper will no longer be associated with the mustelid$/ do
-  @keeper.mustelids.includes?(@mustelid1).should be_false
+  @keeper.mustelids.include?(@mustelid1).should be_false
 end
 
 Then /^the keeper should be associated to no locations$/ do
-  pending # express the regexp above with the code you wish you had
+  @keeper.locations.should == []
 end
 
 Given /^the keeper is associated to no locations$/ do
-  pending # express the regexp above with the code you wish you had
+  @keeper.locations.should == []
 end
 
 When /^a keeper is associated with a location$/ do
-  pending # express the regexp above with the code you wish you had
+  @location1 = Location.create location_attributes
+  @keeper.add_location(@location1)
 end
 
 Then /^the keeper should be shown at that location$/ do
-  pending # express the regexp above with the code you wish you had
+  @keeper.locations.include?(@location1).should be_true
 end
 
 Then /^the keepers start_date should be set for that location$/ do
-  pending # express the regexp above with the code you wish you had
+  KeeperLocation.find_by_keeper_id_and_location_id(@keeper.id, @location1.id).start_date.should_not be_nil
 end
 
 Given /^the keeper is associated with one location$/ do
-  pending # express the regexp above with the code you wish you had
+  @location1 = Location.create location_attributes
+  @location2 = Location.create(location_attributes.merge({:name => 'trury'}))
+  @keeper.add_location(@location1)
 end
 
 When /^a keeper is associated with another location$/ do
-  pending # express the regexp above with the code you wish you had
+  @keeper.add_location(@location2)
 end
 
 Then /^the keeper should be shown at both locations$/ do
-  pending # express the regexp above with the code you wish you had
+  @keeper.locations.include?(@location1).should be_true
+  @keeper.locations.include?(@location2).should be_true
 end
 
 Then /^the keepers start_date should be set for the new location$/ do
-  pending # express the regexp above with the code you wish you had
+  KeeperLocation.find_by_keeper_id_and_location_id(@keeper.id, @location2.id).start_date.should_not be_nil
 end
 
 When /^a keeper is disassociated with the location$/ do
-  pending # express the regexp above with the code you wish you had
+  @keeper.remove_location(@location1)
 end
 
 Then /^the keepers end_date should be set for the location$/ do
-  pending # express the regexp above with the code you wish you had
+  @keeper.locations.include?(@location1).should be_false
+  KeeperLocation.find_by_keeper_id_and_location_id(@keeper.id, @location1.id).end_date.should_not be_nil
 end
 
 Then /^the keeper should not be shown at the location$/ do
-  pending # express the regexp above with the code you wish you had
+  @keeper.locations.include?(@location).should be_false
 end
 
 When /^the keeper is associated with at least one location$/ do
-  pending # express the regexp above with the code you wish you had
+  @location1 = Location.create location_attributes
+  @location2 = Location.create(location_attributes.merge({:name => 'trury'}))
+  @keeper.add_location(@location1)
+  @keeper.add_location(@location2)
 end
 
 When /^the end_date of at least one location is not set$/ do
-  pending # express the regexp above with the code you wish you had
+  @keeper.remove_location(@location2)
 end
 
 Then /^each valid location should be listed$/ do
-  pending # express the regexp above with the code you wish you had
+  # The only valid location should be @location1
+  @keeper.locations[0].name.should == 'new location'
 end
