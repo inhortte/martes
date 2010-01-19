@@ -1,10 +1,10 @@
 # == Schema Information
-# Schema version: 20100114004035
+# Schema version: 20100119014302
 #
 # Table name: locations
 #
 #  id         :integer(4)      not null, primary key
-#  country    :string(255)
+#  country_id :integer(4)
 #  province   :string(255)
 #  address    :string(255)
 #  created_at :datetime

@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100114004035) do
+ActiveRecord::Schema.define(:version => 20100119014302) do
+
+  create_table "countries", :force => true do |t|
+    t.string  "abbr"
+    t.string  "name"
+    t.string  "printable_name"
+    t.string  "iso3"
+    t.integer "numcode"
+  end
 
   create_table "detalojs", :force => true do |t|
     t.integer  "mustelid_id"
@@ -54,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20100114004035) do
   end
 
   create_table "locations", :force => true do |t|
-    t.string   "country"
+    t.integer  "country_id"
     t.string   "province"
     t.string   "address"
     t.datetime "created_at"

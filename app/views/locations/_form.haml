@@ -1,0 +1,23 @@
+- form_for @location do |f|
+  = f.error_messages
+
+  %p
+    = f.label :name
+    = f.text_field :name
+
+  %p
+    = f.label :address
+    = f.text_field :address
+
+  %p
+    = f.label :province
+    = f.text_field :province
+
+  %p
+    %label{:for => "location_country_id"}
+      Country
+    = select_tag "location_country_id", get_options_for_countries(selected), :name => "location[country_id]"
+
+  %p
+    = f.submit save_update
+

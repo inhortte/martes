@@ -20,6 +20,11 @@
       - else
         = "---"
     .entry
-      =h l.country
+      =h l.country.printable_name
+    .entry.smalltext
+      = link_to 'edit', edit_location_path(l), :id => 'edit' + l.id.to_s
+      = link_to 'delete', l, :confirm => 'Are you serious?', :method => :delete, :id => 'delete' + l.id.to_s
     %br
 
+#links
+  = link_to "Add a Location", new_location_path

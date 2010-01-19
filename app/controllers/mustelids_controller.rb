@@ -32,7 +32,7 @@ class MustelidsController < ApplicationController
           redirect_to mustelids_url
         }
         format.xml {
-          render :xml => @mustelid, status => :created,
+          render :xml => @mustelid, :status => :created,
                  :location => mustelid_url(@mustelid)
         }
       else

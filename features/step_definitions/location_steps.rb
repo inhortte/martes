@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
+Country.create!(:abbr => "CA", :name => "CANADA", :printable_name => "Canada")
+
 location_attributes = { :name => "new location",
-                        :country => "ca", 
+                        :country_id => 1,
                         :province => "nova scotia",
                         :address => "halifax" }
 mustelid_attributes = { :name => "twiggie",
@@ -10,35 +13,52 @@ Given /^a location$/ do
   @location = Location.new location_attributes
 end
 
-When /^the location is new$/ do
-  @location.new_record?.should be_true
-  @location.save
+# Scenario: Show all locations
+
+Given /^a number of locations$/ do
+  @location1 = Location.create! location_attributes
+  @location2 = Location.create! location_attributes.merge({:name => 'twiggy'})
 end
 
-Then /^the location should contain no mustelids$/ do
-  @location.mustelids.should == []
+When /^I browse to \/locations$/ do
+  visit locations_path
 end
 
-When /^a mustelid is associated with the location$/ do
-  @mustelid = Mustelid.create mustelid_attributes
-  @location.mustelids << @mustelid
+Then /^I should see a list of the locations$/ do
+  response.should contain("new location")
+  response.should contain("twiggy")
 end
 
-Then /^the location should contain the mustelid$/ do
-  @location.mustelids.size.should == 1
-  @location.mustelids[0].name.should == "twiggie"
+# Scenario: Add a new location
+
+Given /^a new location form$/ do
+  visit locations_path
+  click_link "Add a Location"
 end
 
-Then /^the location should contain no keepers$/ do
-  @location.keepers.should == []
+When /^I fill out the form with a new location and submit it$/ do
+  fill_in "Name", :with => "the lair of habosh"
+  fill_in "Address", :with => "u uranie"
+  fill_in "Province", :with => "holešovice"
+  select "Canada", :from => "Country"
+  click_button "Save"
 end
 
-When /^a keeper is associated with the location$/ do
-  @keeper = Keeper.create keeper_attributes
-  @location.keepers << @keeper
+Then /^the new location should be in the list of locations$/ do
+  visit locations_path
+  response.should contain("the lair of habosh")
 end
 
-Then /^the location should contain the keeper$/ do
-  @location.keepers.size.should == 1
-  @location.keepers[0].name.should == "roger"
+# Scenario: Delete a location
+
+When /^I see "([^\"]*)" in the list of locations$/ do |name|
+  response.should contain(name)
+end
+
+When /^I delete "([^\"]*)"$/ do |name|
+  click_link "delete"
+end
+
+Then /^"([^\"]*)" should no longer be in the list$/ do |name|
+  response.should_not contain(name)
 end

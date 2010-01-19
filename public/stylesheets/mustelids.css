@@ -1,6 +1,6 @@
 body {
   background-color: #ccc;
-  font-size: 12pt; }
+  font-size: 10pt; }
 
 .ital {
   font-style: italic; }
@@ -32,12 +32,12 @@ body {
     font-weight: bold; }
     #maincontent #headings .heading {
       float: left;
-      width: 200px; }
+      width: 150px; }
   #maincontent #entries {
     margin: 0px 0px 10px 0px; }
     #maincontent #entries .entry {
       float: left;
-      width: 200px; }
+      width: 150px; }
     #maincontent #entries br {
       clear: both;
       margin: 0px 0px 5px 0px; }
