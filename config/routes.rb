@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :mustelids
   map.resources :locations
+  map.resources :keepers
 
   # The priority is based upon order of creation: first created -> highest priority.
 

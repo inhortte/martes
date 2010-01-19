@@ -1,0 +1,9 @@
+- form_for @keeper do |f|
+  = f.error_messages
+
+  %p
+    = f.label :name
+    = f.text_field :name
+
+  %p
+    = f.submit save_update
