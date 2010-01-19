@@ -48,7 +48,7 @@ class MustelidsController < ApplicationController
   end
 
   def show
-    redirect_to mustelids_path
+    redirect_to mustelids_url
   end
 
   def edit

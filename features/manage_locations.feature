@@ -20,3 +20,12 @@ Feature: Manage locations
     And I see "new location" in the list of locations
     And I delete "new location"
     Then "new location" should no longer be in the list
+
+  Scenario: Edit a location
+    Given a number of locations
+    When I browse to /locations
+    And I see "new location" in the list of locations
+    And I edit "new location"
+    And I change its province to "newfoundland" and its address to "corner brook"
+    Then "new location" "newfoundland" and "corner brook" should be in the list
+

@@ -1,4 +1,6 @@
 class LocationsController < ApplicationController
+  before_filter :fetch_location, :only => [:edit, :update, :destroy]
+  
   def index
     @locations = Location.find(:all)
 
@@ -30,6 +32,7 @@ class LocationsController < ApplicationController
   end
 
   def show
+    redirect_to locations_url
   end
 
   def edit
@@ -58,5 +61,11 @@ class LocationsController < ApplicationController
       f.html { redirect_to locations_url }
       f.xml { head :ok }
     }
+  end
+
+  private
+  
+  def fetch_location
+    @location = Location.find(params[:id])
   end
 end

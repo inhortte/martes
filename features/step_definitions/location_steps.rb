@@ -62,3 +62,21 @@ end
 Then /^"([^\"]*)" should no longer be in the list$/ do |name|
   response.should_not contain(name)
 end
+
+# Scenario: Edit a location
+
+When /^I edit "([^\"]*)"$/ do |name|
+  click_link "edit"
+end
+
+When /^I change its province to "([^\"]*)" and its address to "([^\"]*)"$/ do |province, address|
+  fill_in "Province", :with => "newfoundland"
+  fill_in "Address", :with => "corner brook"
+  click_button "Update"
+end
+
+Then /^"([^\"]*)" "([^\"]*)" and "([^\"]*)" should be in the list$/ do |name, province, address|
+  response.should contain(name)
+  response.should contain(province)
+  response.should contain(address)
+end
