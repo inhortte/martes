@@ -12,14 +12,16 @@ ActionController::Routing::Routes.draw do |map|
   map.reset_password '/reset_password', :controller => 'users',
                                         :action => 'reset_password'
 
-  map.resources :users, :member => { :suspend => :put, :unsuspend => :put, :purgpe => :delete }
+  map.resources :users, :member => { :suspend => :put, :unsuspend => :put, :purge => :delete }
 
   map.resource :session
 
   map.resources :mustelids
-  map.resources :locations
-  map.resources :keepers
+  map.resources :locations, :member => { :remove_keeper => :get }
+  map.resources :keepers, :member => { :remove_location => :get }
 
+  # map.connect '/keepers/:id/remove_location/:loc_id',
+  #  :controller => 'keepers', :action => 'remove_location'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

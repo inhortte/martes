@@ -1,5 +1,7 @@
 class LocationsController < ApplicationController
-  before_filter :fetch_location, :only => [:show, :edit, :update, :destroy]
+  before_filter :fetch_location, :only => [:show, :edit,
+                                           :update, :destroy,
+                                           :remove_keeper]
   
   def index
     @locations = Location.find(:all)
@@ -41,6 +43,9 @@ class LocationsController < ApplicationController
   def update
     respond_to { |format|
       if @location.update_attributes(params[:location])
+        params[:keepers].each { |k_id|
+          @location.add_keeper(Keeper.find(k_id))
+        }
         flash[:notice] = 'The location has been updated.'
         format.html { redirect_to locations_url }
         format.xml { render :xml => @location, status => :created,
@@ -60,6 +65,13 @@ class LocationsController < ApplicationController
       f.html { redirect_to locations_url }
       f.xml { head :ok }
     }
+  end
+
+  def remove_keeper
+    logger.debug('... entering remove_keeper')
+    logger.debug('... keeper id: ' + params[:k_id])
+    @location.remove_keeper(Keeper.find(params[:k_id]))
+    redirect_to edit_location_path(@location)
   end
 
   private

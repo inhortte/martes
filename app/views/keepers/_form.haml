@@ -14,7 +14,7 @@
         - @keeper.locations.each do |l|
           %div{:id => 'remove' + l.id.to_s}
             = l.name
-            = link_to 'remove', :confirm => 'Really?', :action => :remove_location, :id => l
+            = link_to 'remove', remove_location_keeper_path(:loc_id => l.id), :confirm => 'Really?'
     .multiselect
       = select_tag "locations", get_options_for_locations(@keeper), :multiple => true
 

@@ -97,3 +97,11 @@ Then /^"([^\"]*)" "([^\"]*)" and "([^\"]*)" should be in the list$/ do |name, pr
   response.should contain(province)
   response.should contain(address)
 end
+
+# Scenario: Remove a keeper from a location
+
+When /^I click remove for the keeper "([^\"]*)"$/ do |name|
+  within("#remove" + Keeper.find_by_name(name).id.to_s) do
+    click_link "remove"
+  end
+end

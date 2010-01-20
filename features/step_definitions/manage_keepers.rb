@@ -60,3 +60,12 @@ end
 When /^I change its name to "([^\"]*)"$/ do |name|
   fill_in "Name", :with => name
 end
+
+# Scenario: Remove a location of a keeper
+
+When /^I click remove for the location "([^\"]*)"$/ do |name|
+  within("#remove" + Location.find_by_name(name).id.to_s) do
+    click_link "remove"
+  end
+end
+

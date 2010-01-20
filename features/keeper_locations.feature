@@ -58,8 +58,10 @@ Feature: Associations between keepers and locations
 
   Scenario: Add a keeper to a location
     Given a number of locations
+    And a keeper named "tony"
+    And a keeper named "roger"
     When I browse to locations
-    And I click "edit" for location "terra nova"
+    And I click "edit" for the location "terra nova"
     And I select "tony" from "keepers"
     And I press "Update"
     And I click "show" for the location "terra nova"
@@ -83,7 +85,8 @@ Feature: Associations between keepers and locations
     Then I should not see "roger"
 
   Scenario: Remove a keeper from a location
-    Given a number of locations
+    Given a keeper named "tony"
+    And a number of locations
     And the location of "tony" is "terra nova"
     When I browse to locations
     And I click "edit" for the location "terra nova"
