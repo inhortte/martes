@@ -10,20 +10,22 @@
   %br.clear
 #entries
   - @locations.each do |l|
-    .entry
-      =h l.name
-    .entry
-      =h l.address
-    .entry
-      - unless(l.province.nil? || l.province.blank?)
-        =h l.province
-      - else
-        = "---"
-    .entry
-      =h l.country.printable_name
-    .entry.smalltext
-      = link_to 'edit', edit_location_path(l), :id => 'edit' + l.id.to_s
-      = link_to 'delete', l, :confirm => 'Are you serious?', :method => :delete, :id => 'delete' + l.id.to_s
+    %div{:id => 'entry' + l.id.to_s}
+      .entry
+        =h l.name
+      .entry
+        =h l.address
+      .entry
+        - unless(l.province.nil? || l.province.blank?)
+          =h l.province
+        - else
+          = "---"
+      .entry
+        =h l.country.printable_name
+      .entry.smalltext
+        = link_to 'show', location_path(l), :id => 'show' + l.id.to_s
+        = link_to 'edit', edit_location_path(l), :id => 'edit' + l.id.to_s
+        = link_to 'delete', l, :confirm => 'Are you serious?', :method => :delete, :id => 'delete' + l.id.to_s
     %br
 
 #links

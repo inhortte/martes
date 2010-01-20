@@ -1,5 +1,5 @@
 class KeepersController < ApplicationController
-  before_filter :fetch_keeper, :only => [:edit, :update, :destroy]
+  before_filter :fetch_keeper, :only => [:show, :edit, :update, :destroy]
 
   def index
     @keepers = Keeper.find(:all)
@@ -24,6 +24,9 @@ class KeepersController < ApplicationController
           :status => :unprocessable_entity }
       end
     }
+  end
+
+  def show
   end
 
   def edit

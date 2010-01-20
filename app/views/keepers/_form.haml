@@ -6,4 +6,17 @@
     = f.text_field :name
 
   %p
+    Locations:
+    .vertlist
+      - if @keeper.locations.empty?
+        none
+      - else
+        - @keeper.locations.each do |l|
+          %div{:id => 'remove' + l.id.to_s}
+            = l.name
+            = link_to 'remove', :confirm => 'Really?', :action => :remove_location, :id => l
+    .multiselect
+      = select_tag "locations", get_options_for_locations(@keeper), :multiple => true
+
+  %p
     = f.submit save_update

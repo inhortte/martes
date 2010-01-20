@@ -21,14 +21,14 @@ Feature: Manage keepers
     Given a number of keepers
     When I browse to keepers
     And I see "roger" in the list of keepers
-    And I follow "delete"
+    And I click "delete" for the keeper "roger"
     Then I should not see "roger"
 
   Scenario: Edit a location
     Given a number of keepers
     When I browse to keepers
     And I see "roger" in the list of keepers
-    And I follow "edit"
+    And I click "edit" for the keeper "roger"
     And I change its name to "vlad"
     And I press "Update"
     Then I should see "vlad"

@@ -1,0 +1,26 @@
+%p
+  Name: 
+  = @location.name
+
+%p
+  Address:
+  = @location.address
+
+- unless @location.province.nil?
+  %p
+    Province:
+    = @location.province
+
+%p
+  Country:
+  = @location.country.printable_name
+
+%p
+  Keepers:
+  - if @location.keepers.empty?
+    none
+  - else
+    - @location.keepers.each do |k|
+      %div{:id => 'remove' + k.id.to_s}
+        = k.name
+

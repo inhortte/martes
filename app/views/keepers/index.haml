@@ -4,11 +4,13 @@
   %br.clear
 #entries
   - @keepers.each do |k|
-    .entry
-      =h k.name
-    .entry.smalltext
-      = link_to 'edit', edit_keeper_path(k), :id => 'edit' + k.id.to_s
-      = link_to 'delete', k, :confirm => 'Are you serious?', :method => :delete, :id => 'delete' + k.id.to_s
+    %div{:id => 'entry' + k.id.to_s}
+      .entry
+        =h k.name
+      .entry.smalltext
+        = link_to 'show', keeper_path(k), :id => 'show' + k.id.to_s
+        = link_to 'edit', edit_keeper_path(k), :id => 'edit' + k.id.to_s
+        = link_to 'delete', k, :confirm => 'Are you serious?', :method => :delete, :id => 'delete' + k.id.to_s
     %br
 
 #links

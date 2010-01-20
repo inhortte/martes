@@ -1,0 +1,17 @@
+%h3
+  @keeper.name
+
+%p
+  Name:
+  = @keeper.name
+
+%p
+  Locations:
+  - if @keeper.locations.empty?
+    none
+  - else
+    - @keeper.locations.each do |l|
+      %div{:id => 'remove' + l.id.to_s}
+        = l.name
+
+

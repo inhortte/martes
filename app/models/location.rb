@@ -19,6 +19,7 @@ class Location < ActiveRecord::Base
   has_many :keepers, :through => :keeper_locations
   belongs_to :country
   validates_presence_of :name, :country_id, :address
+  default_find_option :order, :name
 
   def keepers
     self.keeper_locations(true).select { |kl|
@@ -36,6 +37,31 @@ class Location < ActiveRecord::Base
     KeeperLocation.find_by_keeper_id_and_location_id(keep.id, self.id).destroy
   end
 
-  # Modify the destroy method to kill the KeeperLocation and LocationMustelid
-  # entries.
+  def mustelids
+    self.location_mustelids(true).select { |lm|
+      lm.end_date.nil?
+    }.inject([]) { |weasels, lm|
+      weasels << lm.mustelid
+    }
+  end
+
+  def add_mustelid(weasel)
+    kl = LocationMusstelid.create(:location_id => self.id, :mustelid_id => weasel.id)
+  end
+
+  def remove_mustelid(weasel)
+    LocationMustelid.find_by_location_id_and_mustelid_id(self.id, weasel.id).destroy
+  end
+
+  def destroy
+    KeeperLocation.find(:all,
+                        :conditions => ["location_id = ?", self.id]).each { |kl|
+      kl.orig_destroy
+    }
+    LocationMustelid.find(:all,
+                          :conditions => ["location_id = ?", self.id]).each { |lm|
+      lm.orig_destroy
+    }
+    super
+  end
 end

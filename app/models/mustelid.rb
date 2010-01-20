@@ -23,4 +23,20 @@ class Mustelid < ActiveRecord::Base
 
   accepts_nested_attributes_for :detaloj, :allow_destroy => true,
     :reject_if => proc { |attr| attr.all? { |k, v| v.blank? } }
+
+  def locations
+    self.location_mustelids(true).select { |lm|
+      lm.end_date.nil?
+    }.inject([]) { |locs, lm|
+      locs << lm.location
+    }
+  end
+
+  def add_location(loc)
+    kl = LocationMusstelid.create(:location_id => loc.id, :mustelid_id => self.id)
+  end
+
+  def remove_location(loc)
+    LocationMustelid.find_by_location_id_and_mustelid_id(loc.id, self.id).destroy
+  end
 end

@@ -19,6 +19,7 @@ class KeeperLocation < ActiveRecord::Base
     self.start_date ||= Time.now
   end
 
+  alias_method :orig_destroy, :destroy
   def destroy
     self.end_date ||= Time.now
     self.save

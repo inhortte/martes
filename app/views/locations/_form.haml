@@ -19,5 +19,19 @@
     = select_tag "location_country_id", get_options_for_countries(selected), :name => "location[country_id]"
 
   %p
+    %label{:for => "keepers"}
+      Keepers:
+    .vertlist
+      - if @location.keepers.empty?
+        none
+      - else
+        - @location.keepers.each do |k|
+          %div{:id => 'remove' + k.id.to_s}
+            = k.name
+            = link_to 'remove', :confirm => 'Really?', :action => :remove_keeper, :id => k
+    .multiselect
+      = select_tag "keepers", options_from_collection_for_select(Keeper.find(:all).select { |k| !@location.keepers.include?(k) }, :id, :name), :multiple => true
+
+  %p
     = f.submit save_update
 

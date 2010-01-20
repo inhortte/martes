@@ -2,7 +2,7 @@ class MustelidsController < ApplicationController
   layout "application.haml"
 
   before_filter :fetch_subfamilies, :only => [:new, :edit]
-  before_filter :fetch_mustelid, :only => [:edit, :update, :destroy]
+  before_filter :fetch_mustelid, :only => [:show, :edit, :update, :destroy]
 
   def index
     options = { :order => 'created_at desc', :per_page => 10 }
@@ -48,7 +48,6 @@ class MustelidsController < ApplicationController
   end
 
   def show
-    redirect_to mustelids_url
   end
 
   def edit

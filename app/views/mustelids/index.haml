@@ -6,15 +6,16 @@
   %br.clear
 #entries
   - @mustelids.each do |m|
-    .entry
-      =h m.name
-    .entry
-      %em
-        = m.species.genus.name
-        = m.species.name
-    .entry.smalltext
-      = link_to 'edit', edit_mustelid_path(m)
-      = link_to 'delete', m, :confirm => 'Are you serious?', :method => :delete
+    %div{:id => 'entry' + m.id.to_s}
+      .entry
+        =h m.name
+      .entry
+        %em
+          = m.species.genus.name
+          = m.species.name
+      .entry.smalltext
+        = link_to 'edit', edit_mustelid_path(m)
+        = link_to 'delete', m, :confirm => 'Are you serious?', :method => :delete
     %br
 
 #links
