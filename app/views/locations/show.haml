@@ -24,3 +24,11 @@
       %div{:id => 'remove' + k.id.to_s}
         = k.name
 
+%p
+  Mustelids:
+  - if @location.mustelids.empty?
+    none
+  - else
+    - @location.mustelids.each do |m|
+      %div{:id => 'remove' + m.id.to_s}
+        = m.name

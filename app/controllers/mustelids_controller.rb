@@ -27,6 +27,9 @@ class MustelidsController < ApplicationController
 
     respond_to { |format|
       if @mustelid.save
+        @mustelid.add_location(params[:location] == 0 ?
+                               nil :
+                               Location.find(params[:location]))
         flash[:notice] = 'The mustelid has been saved.'
         format.html {
           redirect_to mustelids_url
@@ -56,6 +59,9 @@ class MustelidsController < ApplicationController
   def update
     respond_to { |format|
       if @mustelid.update_attributes(params[:mustelid])
+        @mustelid.add_location(params[:location] == 0 ?
+                               nil :
+                               Location.find(params[:location]))
         flash[:notice] = 'The mustelid has been updated.'
         format.html {
           redirect_to mustelids_url

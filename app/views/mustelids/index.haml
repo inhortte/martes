@@ -14,6 +14,7 @@
           = m.species.genus.name
           = m.species.name
       .entry.smalltext
+        = link_to 'show', mustelid_path(m)
         = link_to 'edit', edit_mustelid_path(m)
         = link_to 'delete', m, :confirm => 'Are you serious?', :method => :delete
     %br

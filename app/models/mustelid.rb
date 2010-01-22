@@ -32,8 +32,29 @@ class Mustelid < ActiveRecord::Base
     }
   end
 
+  def location
+    l = self.locations
+    l.empty? ? nil : l[0]
+  end
+
+  # Right now, I am assuming that a mustelid will only be at one
+  # location at any one time. Probably I'll have to change this
+  # in the future and it'll be nerve-wracking and a general irritant.
+  # But, I am funny that way.
   def add_location(loc)
-    kl = LocationMusstelid.create(:location_id => loc.id, :mustelid_id => self.id)
+    logger.debug '... attempting to destroy extant location_mustelids'
+    begin
+      LocationMustelid.find_all_by_mustelid_id(self.id).each { |lm|
+        logger.debug '... destroying ... mustelid #' + lm.mustelid_id.to_s + ' location #' + lm.location_id.to_s
+        lm.destroy
+      }
+    rescue NoMethodError
+      # If there is no entry in location_mustelids, it will try
+      # to call 'each' on nil.
+    end
+    unless loc.nil?
+      LocationMustelid.create(:location_id => loc.id, :mustelid_id => self.id)
+    end
   end
 
   def remove_location(loc)

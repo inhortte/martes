@@ -33,5 +33,19 @@
       = select_tag "keepers", options_from_collection_for_select(Keeper.find(:all).select { |k| !@location.keepers.include?(k) }, :id, :name), :multiple => true
 
   %p
+    %label{:for => "mustelids"}
+      Mustelids:
+    .vertlist
+      - if @location.mustelids.empty?
+        none
+      - else
+        - @location.mustelids.each do |m|
+          %div{:id => 'remove' + m.id.to_s}
+            = m.name
+            = link_to 'remove', remove_mustelid_location_path(:m_id => m.id), :confirm => 'Really?'
+    .multiselect
+      = select_tag "mustelids", options_from_collection_for_select(Mustelid.find(:all).select { |m| !@location.mustelids.include?(m) }, :id, :name), :multiple => true
+
+  %p
     = f.submit save_update
 

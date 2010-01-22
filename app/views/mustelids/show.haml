@@ -1,0 +1,31 @@
+%h3
+  A mustelid
+
+%p
+  Name: 
+  = @mustelid.name
+
+%p
+  Latin name:
+  = @mustelid.species.genus.name
+  = @mustelid.species.name
+
+- unless @mustelid.detaloj.nil?
+  %p
+    Color:
+    = @mustelid.detaloj.color
+
+  %p
+    Condylobassal length:
+    = @mustelid.detaloj.condylobassal_length
+
+  %p
+    Image:
+    Put the image here.
+
+%p
+  Location:
+  - if @mustelid.location.nil?
+    none
+  - else
+    = @mustelid.location.name

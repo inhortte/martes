@@ -17,7 +17,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
   map.resources :mustelids
-  map.resources :locations, :member => { :remove_keeper => :get }
+  map.resources :locations, :member => { :remove_keeper => :get,
+                                         :remove_mustelid => :get }
   map.resources :keepers, :member => { :remove_location => :get }
 
   # map.connect '/keepers/:id/remove_location/:loc_id',

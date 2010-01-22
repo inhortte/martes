@@ -18,4 +18,8 @@
       = d.label :image
       = d.file_field :image
   %p
+    %label{:for => "location"}
+      Location:
+      = select_tag "location", get_options_for_locations(nil, @mustelid.location.nil? ? 0 : @mustelid.location.id, true)
+  %p
     = f.submit save_update

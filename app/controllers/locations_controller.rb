@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
   before_filter :fetch_location, :only => [:show, :edit,
                                            :update, :destroy,
-                                           :remove_keeper]
+                                           :remove_keeper, :remove_mustelid]
   
   def index
     @locations = Location.find(:all)
@@ -20,6 +20,18 @@ class LocationsController < ApplicationController
     @location = Location.new(params[:location])
     respond_to { |format|
       if @location.save
+        begin
+          params[:keepers].each { |k_id|
+            @location.add_keeper(Keeper.find(k_id))
+          }
+        rescue NoMethodException
+        end
+        begin
+          params[:mustelids].each { |m_id|
+            @location.add_mustelid(Mustelid.find(m_id))
+          }
+        rescue NoMethodException
+        end
         flash[:notice] = 'The location has been saved.'
         format.html { redirect_to locations_url }
         format.xml { render :xml => @location, :status => created,
@@ -43,9 +55,18 @@ class LocationsController < ApplicationController
   def update
     respond_to { |format|
       if @location.update_attributes(params[:location])
-        params[:keepers].each { |k_id|
-          @location.add_keeper(Keeper.find(k_id))
-        }
+        begin
+          params[:keepers].each { |k_id|
+            @location.add_keeper(Keeper.find(k_id))
+          }
+        rescue NoMethodError
+        end
+        begin
+          params[:mustelids].each { |m_id|
+            @location.add_mustelid(Mustelid.find(m_id))
+          }
+        rescue NoMethodError
+        end
         flash[:notice] = 'The location has been updated.'
         format.html { redirect_to locations_url }
         format.xml { render :xml => @location, status => :created,
@@ -68,9 +89,12 @@ class LocationsController < ApplicationController
   end
 
   def remove_keeper
-    logger.debug('... entering remove_keeper')
-    logger.debug('... keeper id: ' + params[:k_id])
     @location.remove_keeper(Keeper.find(params[:k_id]))
+    redirect_to edit_location_path(@location)
+  end
+
+  def remove_mustelid
+    @location.remove_mustelid(Mustelid.find(params[:m_id]))
     redirect_to edit_location_path(@location)
   end
 
